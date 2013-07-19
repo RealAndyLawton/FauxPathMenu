@@ -1,0 +1,14 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   	xmlns:pathmenu="http://schemas.android.com/apk/res/com.realandylawton.pathmenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <com.realandylawton.pathmenu.PathMenu
+        android:id="@+id/path_menu"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:background="#000000"
+        pathmenu:anchorView="@drawable/ic_launcher" />
+
+</RelativeLayout>

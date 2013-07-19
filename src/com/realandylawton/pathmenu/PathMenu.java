@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
@@ -69,9 +68,14 @@ public class PathMenu extends FrameLayout {
 	
 	public void addMenuItems(List<PathMenuItem> menuItems) {
 		
-		mMenuItems.addAll(menuItems);
-		Log.d(getClass().getSimpleName(), "menuItems.size=" + menuItems.size());
+		if(menuItems != null) {
+			if(menuItems.size() == 0) {
+				// TODO Handle empty menu more gracefully
+				return;
+			}
+		}
 		
+		mMenuItems.addAll(menuItems);		
 		float[] degrees = getMenuItemDegrees();
 
 		int i = 0;
@@ -87,6 +91,7 @@ public class PathMenu extends FrameLayout {
 			
 			// Find the (x,y) coords
 			float itemDegree = degrees[i];
+			// TODO Handle DP conversion
 			int x = (int) (DISTANCE * Math.cos(Math.toRadians(itemDegree))); // x = dcos(theta);
 			int y = (int) (DISTANCE * Math.sin(Math.toRadians(itemDegree))); // y = dsin(theta);
 			
@@ -97,7 +102,7 @@ public class PathMenu extends FrameLayout {
 			translate.setDuration(translateDuration);
 			translate.setInterpolator(getContext(), android.R.anim.anticipate_overshoot_interpolator);
 	
-			
+			// TODO Use PropertyAnimation instead of old school view animation, so we can animate properties like visibility
 			AlphaAnimation alpha = new AlphaAnimation(0, 1.0f);
 			alpha.setDuration(translateDuration / 2);
 			
@@ -108,7 +113,6 @@ public class PathMenu extends FrameLayout {
 			animation.setFillEnabled(true);
 
 			animation.addAnimation(translate);
-//			animation.addAnimation(rotate);
 			
 			menuItem.setView(menuItemView);
 			menuItem.setInAnimation(animation);

@@ -102,7 +102,7 @@ public class PathMenu extends FrameLayout {
 			translate.setDuration(translateDuration);
 			translate.setInterpolator(getContext(), android.R.anim.anticipate_overshoot_interpolator);
 	
-			// TODO Use PropertyAnimation instead of old school view animation, so we can animate properties like visibility
+			// TODO Use PropertyAnimation instead of old school view animation,
 			AlphaAnimation alpha = new AlphaAnimation(0, 1.0f);
 			alpha.setDuration(translateDuration / 2);
 			
@@ -113,6 +113,7 @@ public class PathMenu extends FrameLayout {
 			animation.setFillEnabled(true);
 
 			animation.addAnimation(translate);
+			animation.addAnimation(alpha);
 			
 			menuItem.setView(menuItemView);
 			menuItem.setInAnimation(animation);
